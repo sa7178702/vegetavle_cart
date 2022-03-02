@@ -1,0 +1,16 @@
+<div class="container">
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+	<div class="jumbotron">
+	<h4 class="display-4" style="font-family:cursive;"><%= @address.street_address%></h4>
+	<p class="lead"><b>City : </b><%= @address.city%></p>
+	<hr class="my-4">
+	<p><b>State : </b><%= @address.state%> |
+	<b>Country : </b><%= @address.country%> |
+	<b>Pincode : </b><%= @address.pin_code%></p>
+    <%= link_to "back",addresses_path,class:"btn btn-primary"%>
+	</div>
+</div>
+<div class="col-sm-3"></div>
+</div>

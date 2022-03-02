@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container-fluid">
+
+<%= link_to home_index_path do %>
+   <%= image_tag "logo2.jpg",style:"height:40px;width:200px;border-radius:5px;" %>
+<% end %>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+<% if user_signed_in? %>
+<% if current_user.role =='admin'%>
+<!-- admin search input box -->
+<div style="margin-top:5px;">
+<%= form_for "",url:  home_index_path , role: "search" , method: :get do%>
+<%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;"%>
+<%end%>
+</div>
+<!-- admin dropsown list -->
+<div class="dropdown" style="margin-left:500px;">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  User Profile
+</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li class="nav-item">
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+    <%= link_to 'Edit Profile', edit_user_registration_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+    <%= link_to 'add vegetable', new_vegetable_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+    <%= link_to 'vegetable list',home_index_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+    <%= link_to 'add category',new_category_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+    <%= link_to 'All category',categories_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+  </ul>
+</div>
+<!-- end admin dropdown-->
+<% else %>
+<!-- <form class="d-flex">
+<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+<button class="btn btn-outline-success" type="submit">Search</button>
+</form> -->
+<!--user search box-->
+<div style="margin-top:5px;">
+  <%= form_for "",url:  home_index_path , role: "search" , method: :get do%>
+  <%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;"%>
+  <%end%>
+</div>
+<!--end user search box-->
+<!--user dropdown -->
+<div class="dropdown" style="margin-left:400px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    User Profile
+  </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link',style:"color:black;" %></li>
+    <li class="nav-item">
+        <%= link_to 'Edit Profile', edit_user_registration_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+    <li class="nav-item">
+        <%= link_to 'all vegetable list',home_index_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+     <li class="nav-item">
+        <%= link_to 'add address',new_address_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+         <li class="nav-item">
+        <%= link_to 'address list',addresses_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+      </li>
+         <li class="nav-item">
+        <%= link_to 'cart list',cart_items_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+  </ul>
+</div>
+<!--end user dropdown-->
+<!--start category dropdown-->
+<div class="dropdown" style="margin-left: 10px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    select category
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+   <li class="nav-item">
+      <%= link_to 'All category',categories_path,class: 'nav-link',style:"color:black;" %>
+  </li>
+  </ul>
+</div>
+<!-- end category list-->
+ <li class="nav-item">
+    <%= link_to 'Map',maps_path,class: 'nav-link',style:"color:white;margin-left:5px;",class:"btn btn-secondary" %>
+</li>
+<% end %>
+<% else %>
+<% end %>
+<li class="nav-item">
+  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+</li>
+</ul>
+</div>
+</div>
+</nav>

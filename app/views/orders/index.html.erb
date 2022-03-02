@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="box shadow">
+      <div class="col-sm-6">
+        <div class="box shadow">
+          <div class="row">
+            <div class="col-sm-12">
+              <nav class="navbar navbar-light bg-info">
+                <div class="container-fluid">
+                  <span class="navbar-brand mb-0 h1" style="color:white;font-family:Italic;">Login</span>
+                </div>
+              </nav>
+            </div>
+          </div><%@address.each do |add|%>
+          <div class="card" style="width: 35rem;">
+            <div class="card-body">
+              <h6 class="card-title mb-3">
+                <b>Address : </b><%=add.street_address%>
+              </h6>
+              <h6 class="card-subtitle mb-2">
+                <b>City : </b><%=add.city%>
+              </h6>
+              <p class="card-text mb-2">
+                <b>State: </b><%=add.state%>
+              </p>
+              <p class="card-text mb-2">
+                <b>country : </b><%=add.country%>
+              </p>
+              <p class="card-text">
+                <b>Pin code : </b><%=add.pin_code%>
+              </p>
+              <p class="confirm"><%=link_to "CONFIRM","#",class:"btn btn-warning",style:"margin-left:250px;width:200px;color:white;font-family:bold;"%>
+              </p>
+            </div>
+          </div><%end%>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+</div>
+ <script type="text/javascript">
+  $(".confirm").on("click", function(){
+         alert("product ordered Successfully")
+    });
+</script>

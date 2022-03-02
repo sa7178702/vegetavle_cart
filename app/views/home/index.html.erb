@@ -1,0 +1,57 @@
+ <style>
+  #card
+  {
+  width: 353px;
+  height: 230px;
+   transition: 1s all;
+  }
+ #card:hover
+  {
+  width: 353px;
+  height: 230px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black ;
+  transition: 500ms linear;
+  transform: scale(1.2);
+
+  /*transform-origin: top;*/
+  z-index: 100;
+  }
+</style>
+<h3 style="text-align: center;font-family: cursive;">Welcome to dashboard</h3>
+<div class="container">
+<div class="row" >
+  <% @vegetable.each do |vege|%>
+  <div class="col-sm-4">
+    <div class="card mb-3" style="max-width: 540px;"id="card">
+      <div class="row g-0" >
+        <div class="col-md-4" style="margin-top:30px;">
+          <!-- <img src="..." class="img-fluid rounded-start" alt="...">-->
+          <%= image_tag(vege.vegetable_img) if vege.vegetable_img.attached?%>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= vege.name%></h5>
+            <p class="card-text"><%= vege.price%> </p>
+            <p class="card-text"><%= vege.category_id%> </p>
+            <p class="card-text"><%= vege.description%> </p>
+            <% if current_user.role =='admin'%>
+            <%= link_to "Show" ,vegetable_path(vege.id) ,class:"btn btn-primary"%>
+            <%= link_to "Edit" ,edit_vegetable_path(vege.id),class:"btn btn-primary"%>
+            <%= link_to "Delete" ,vegetable_path(vege.id),method: :delete,class:"btn btn-danger"%>
+            <%else%>
+            <%= link_to "Add to cart" ,add_to_cart_path(cart_id: @cart_id ,id: vege.id,price: vege.price,name:vege.name,vegetable_img:vege.vegetable_img),class:"btn btn-danger",style:"width:200px;", method:"post"%>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end%>
+</div>
+<div class="row">
+  <div class="col-sm-10"></div>
+  <div class="col-sm-2">
+    <%= will_paginate @vegetable, renderer: BootstrapPagination::Rails%>
+  </div>
+</div>

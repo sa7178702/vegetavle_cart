@@ -1,0 +1,140 @@
+<style>
+    #card
+  {
+  transition: 1s all;
+  }
+ #card:hover
+  {
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px 2px black inset ;
+  transition: 500ms linear;
+  z-index: 1000;
+  }
+
+ #all_T_amount
+ {
+  font-family:cursive;
+  position: fixed;
+  top: 60px;
+  left: 900px;
+  z-index: 1;
+ }
+  #all_T_amount:hover
+ {
+  color: darkgreen;
+  font-family: bold;
+  font-family:cursive;
+  position: fixed;
+  top: 60px;
+  left: 900px;
+  z-index: 1;
+ }
+</style>
+<h2 style="font-family:cursive;text-align:center">Cart Data</h2>
+<div class="container">
+  <iv class="row">
+    <% @cart.each_with_index do |cart, index|%>
+    <% vegetable = Vegetable.find(cart.vegetable_id)%>
+    <div class="col-sm-12">
+      <div class="card mb-3">
+        <div class="row g-0"id="card">
+          <div class="col-md-4" style="margin-top:50px;padding-left: 100px;">
+            <!-- <img src="..." class="img-fluid rounded-start" alt="...">-->
+            <%#byebug%>
+            <%= image_tag(vegetable.vegetable_img) if cart.vegetable_id.present?%>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body"style="margin-left: 300px;">
+              <p class="card-title"><b>Name : </b><%=Vegetable.find(cart.vegetable_id).name%></p>
+              <p class="card-text" ><b>Price : </b><span id="price_<%= cart.id %>"><%= cart.price%></span> </p>
+              <%= cart.user_id%> | <%= cart.vegetable_id%>
+              <p class="card-text" ><b>Quantity : </b><span id= "quantity_<%=cart.id %>"><%=cart.quntity.to_i%></span></p>
+              <%=link_to "Buy now" ,orders_path(user_id: @user_id ,id: cart.id), class: "btn btn-primary"%>
+              <%=link_to "Remove" ,cart_item_path(cart.id),method: :delete ,data: {confirm:"Are You Soure ?"} ,class: "btn btn-danger"%>
+              <br></br>
+              <input type="button" id= "<%= cart.id %>" value="-" class="decriment" />
+              <input type="text" name="quantity" value="<%= cart.quntity ? cart.quntity : "1" %>"   size="1" id="number_<%=cart.id %>" style="text-align:center;" />
+              <input type="button" id= "<%= cart.id %>" value="+" class="increment" />
+             <P style="margin-top:10px;margin-left: 210px;">Total Amount : </P><p class="card-text"  id="total_<%=cart.id%>" style="margin-left: 340px;margin-top: -40px;" ><%=(cart.quntity.to_i*cart.price.to_i)%></p>
+              <!-- <h1 style="font-family:cursive;text-align:right" id="total_<%=cart.id%>">Total Amount : <%#=cart.price%> </h1> -->
+              <div id="all_T_amount">
+              <span>Total Cart Amount : </span>
+                <span>
+                  <%=@cart.map(&:price).map(&:to_i).sum%>
+                </span>
+                <span style="margin-left:10px;">Total cart Item :
+                  <span><%=@cart.map(&:id).count%></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(".increment").on("click", function(){
+    id = $(this).attr("id")
+    var text_value;
+    text_value = document.getElementById("number_"+id).value
+   text_value++
+     // document.getElementById("number_"+id).val = text_value
+      // document.getElementById("total_"+id).innerHTML = text_value
+    data_text = document.getElementById("number_"+id).value =text_value
+    id = this.id
+     $.ajax({
+        type: "POST",
+        url: "/incr_quantity",
+        dataType: "json",
+        data: {
+            value: data_text,
+            id: id// < note use of 'this' here
+        },
+        success: function(data) {
+            alert('Product add Successfully');
+            document.getElementById("quantity_"+id).innerHTML = text_value
+            total_price = document.getElementById("price_"+id).innerHTML * text_value
+            document.getElementById("total_"+id).innerHTML = total_price
+
+        },
+        error: function(data) {
+            alert('error');
+        }
+    });
+});
+
+  $(".decriment").on("click", function(){
+    id = $(this).attr("id")
+    var text_value;
+    text_value = document.getElementById("number_"+id).value
+    text_value--
+    document.getElementById("number_"+id).val =text_value
+    document.getElementById("number_"+id).value =text_value
+    id = this.id
+     $.ajax({
+        type: "POST",
+        url: "/decr_quantity",
+        dataType: "json",
+        data: {
+            value: data_text,
+            id: id// < note use of 'this' here
+        },
+        success: function(data) {
+            alert('Product decreased');
+             document.getElementById("quantity_"+id).innerHTML = text_value
+             total_price = document.getElementById("price_"+id).innerHTML * text_value
+            document.getElementById("total_"+id).innerHTML = total_price
+        },
+        error: function(data) {
+            alert('error');
+        }
+    });
+});
+</script>
+

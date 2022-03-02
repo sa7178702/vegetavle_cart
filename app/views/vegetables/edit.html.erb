@@ -1,0 +1,19 @@
+<div class="container">
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-4" style="margin: 10px;">
+    <h3 style="font-family: cursive;text-align: center;">Update Vegetable </h3>
+    <%= form_for @vegetable do |f|%>
+      <%=f.label :name%>
+      <%=f.text_field :name,class:"form-control"%>
+       <%=f.label :price%>
+      <%=f.text_field :price,class:"form-control"%>
+       <%=f.label :description%>
+      <%=f.text_field :description,class:"form-control"%>
+       <%=f.label :vegetable_img%>
+      <%=f.file_field :vegetable_img,class:"form-control"%>
+       <%=f.submit "Update",class:"btn btn-primary",style:"margin-top:10px;"%>
+    <%end%>
+  </div>
+</div>
+</div>
