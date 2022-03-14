@@ -34,6 +34,23 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control" %>
   </div>
+ <div>
+     <%= f.label :gender %><br />
+     <%= f.text_field :gender,class:"form-control"%>
+  </div>
+ <div>
+     <%= f.label :mobno %><br />
+     <%= f.text_field :mobno, autofocus: true ,class:"form-control"%>
+  </div>
+ <div>
+     <%= f.label :address %><br />
+     <%= f.text_field :address, autofocus: true ,class:"form-control"%>
+  </div>
+   <div>
+     <%= f.label :User_image %><br />
+     <%= f.file_field :user_img, autofocus: true ,class:"form-control"%>
+  </div>
+
 
   <div class="actions">
     <%= f.submit "Sign up" ,class:"btn btn-primary",style:"margin-top:10px;"%>

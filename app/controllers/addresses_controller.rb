@@ -18,6 +18,12 @@ def create
 end
 
 def show
+	respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Address id: #{@address.id}",template: "addresses/show.html.erb"   # Excluding ".pdf" extension.
+      end
+    end
 end
 
 def edit

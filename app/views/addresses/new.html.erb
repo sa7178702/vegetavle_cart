@@ -1,4 +1,25 @@
 <style>
+
+ .btn-grad {background-image: linear-gradient(to right, #43cea2 0%, #185a9d  51%, #43cea2  100%)}
+ .btn-grad {
+    margin: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 10px #eea;
+    border-radius: 10px;
+    display: block;
+    text-decoration: none;
+  }
+
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
   .txt
   {
     height: 45px;
@@ -23,7 +44,7 @@
     <%=f.text_field :pin_code,class:"form-control txt"%>
     <%#=f.label :user_id%>
     <%=f.hidden_field :user_id, value: current_user.id, class:"form-control txt"%>
-    <%=f.submit "add address",class:"btn btn-primary",style:"margin-top:10px; height:50px;margin-bottom:10px;"%>
+    <%=f.submit "add address",class:"btn-grad",style:"margin-top:10px; height:50px;margin-bottom:10px;"%>
   <%end%>
 </div>
 </div>

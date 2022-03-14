@@ -1,19 +1,38 @@
  <style>
+
+   .btn-grad {background-image: linear-gradient(to right, #16A085 0%, #F4D03F  51%, #16A085  100%)}
+   .btn-grad {
+      padding: 10px 15px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;
+      box-shadow: 0 0 20px #eee;
+      border-radius: 8px;
+      display: block;
+      text-decoration: none;
+    }
+
+    .btn-grad:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
   #card
   {
   width: 353px;
-  height: 230px;
+  height: 235px;
    transition: 1s all;
   }
  #card:hover
   {
   width: 353px;
-  height: 230px;
+  height: 235px;
   border-radius: 10px;
   box-shadow: 2px 2px 5px black ;
   transition: 500ms linear;
   transform: scale(1.2);
-
   /*transform-origin: top;*/
   z-index: 100;
   }
@@ -36,11 +55,16 @@
             <p class="card-text"><%= vege.category_id%> </p>
             <p class="card-text"><%= vege.description%> </p>
             <% if current_user.role =='admin'%>
-            <%= link_to "Show" ,vegetable_path(vege.id) ,class:"btn btn-primary"%>
-            <%= link_to "Edit" ,edit_vegetable_path(vege.id),class:"btn btn-primary"%>
+            <%= link_to "Show" ,vegetable_path(vege.id) ,class:"btn btn-primary",style:"margin-right:-1px;"%>
+            <%= link_to "Edit" ,edit_vegetable_path(vege.id),class:"btn btn-primary",style:"margin-left:-1px;"%>
             <%= link_to "Delete" ,vegetable_path(vege.id),method: :delete,class:"btn btn-danger"%>
             <%else%>
-            <%= link_to "Add to cart" ,add_to_cart_path(cart_id: @cart_id ,id: vege.id,price: vege.price,name:vege.name,vegetable_img:vege.vegetable_img),class:"btn btn-danger",style:"width:200px;", method:"post"%>
+            <%= link_to "Add to cart" ,add_to_cart_path(cart_id: @cart_id ,id: vege.id,price: vege.price,name:vege.name,vegetable_img:vege.vegetable_img),class:"btn-grad ", method:"post"%><br>
+            <i class="fa fa-star" aria-hidden="true" style="margin-left: 20px;color:#f4ec10;"></i>
+            <i class="fa fa-star" aria-hidden="true" style="color:#f4ec10"></i>
+            <i class="fa fa-star" aria-hidden="true"style="color:#f4ec10"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
             <%end%>
           </div>
         </div>

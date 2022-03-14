@@ -1,0 +1,34 @@
+<style type="text/css">
+  .bclass
+  {
+    font-family: serif;
+  }
+</style>
+<div class="container px-4 m-2">
+<div class="row gx-5">
+  <div class="col">
+     <div class="p-3 border bg-light">
+        <%= image_tag(Vegetable.find(@cart.vegetable_id).vegetable_img,style:"margin-left:100px;height:180px;width:300px;") if @cart.present?%>
+     </div>
+  </div>
+  <div class="col">
+     <div class="p-3 border bg-light">
+        <b class="bclass">user Id : </b> <%=@cart.user_id%><br>
+        <b class="bclass">vegetable Id : </b> <%=@cart.vegetable_id%><br>
+        <b class="bclass">Cart Id: </b> <%=@cart.cart_id%><br>
+        <b class="bclass">Quantity  : </b><%=@cart.quntity%><br>
+        <b class="bclass">price : </b> <%=@cart.price.to_i*@cart.quntity.to_i%><br>
+        <%#=link_to "Buy now",cart_item_path(user_id: current_user.id ,vegetable_id: Vegetable.find(cart.vegetable_id).id),
+           method: 'post', class: "btn btn-primary"%>
+           <%#byebug%>
+        <p class="confirm"><%=link_to "CONFIRM",orders_path(user_id: current_user.id , vegetable_id: params[:vegetable_id], address_id: params[:id],cartitems_id: params[:ids], bunch_buy: params[:buch_buy]),class:"btn btn-warning",style:"margin-left:250px;width:200px;color:white;font-family:bold;",method:"post"%>
+        </p>
+     </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(".confirm").on("click", function(){
+alert("product ordered Successfully")
+});
+</script>

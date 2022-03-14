@@ -39,11 +39,11 @@ end
 
 def add_to_cart
 
-  # @current_cart = current_user.cart ? current_user.cart : current_user.cart.create!
-  # if @current_cart.save
+   #current_cart = current_user.cart ? current_user.cart : current_user.cart.create
+  if current_cart.save
   @cart_items = current_cart.cart_items.create(user_id: current_user.id ,vegetable_id: params[:id],cart_id: current_cart.id,price: params[:price],quntity:1)
   redirect_to cart_items_path
- # end
+ end
 end
 
 def incr_quantity

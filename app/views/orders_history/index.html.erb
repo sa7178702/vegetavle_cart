@@ -1,0 +1,31 @@
+<div class="container">
+	<h5 style="text-align: center;">All Order History</h5>
+	<div class="row">
+		<div class="col-sm-12">
+<table class="table table-bordered border-secondary">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User Id</th>
+      <th scope="col">Vegetable ID</th>
+       <th scope="col">Address Id</th>
+       <th scope="col">Quantity</th>
+        <th scope="col">Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<%Order.all.each do |order|%>
+    <tr>
+      <th scope="row"><%=order.id%></th>
+      <td><%=order.user_id%></td>
+      <td><%=order.vegetable_id%></td>
+       <td><%=order.address_id%></td>
+        <td><%=order.quantity%></td>
+          <td><%=order.price%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

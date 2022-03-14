@@ -25,6 +25,7 @@
       <td><%=add.country%></td>
       <td><%=add.pin_code%></td>
       <!-- <td><%#=current_user.id%></td> -->
+        <td><%= link_to "PDF",address_path(@address ,format: :pdf),class:"btn btn-primary"%></td>
       <td><%= link_to "Show",address_path(add.id),class:"btn btn-primary"%></td>
        <td><%= link_to "Edit",edit_address_path(add.id),class:"btn btn-primary"%></td>
         <td><%= link_to "Delete",address_path(add.id),method: :delete ,data: {Confirm:"Are You Soure ?"},class:"btn btn-danger"%></td>

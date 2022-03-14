@@ -1,4 +1,23 @@
 <style>
+
+ .btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
+ .btn-grad {
+    padding: 10px 15px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 5px #eee;
+    border-radius: 10px;
+    display: block;
+     text-decoration: none;
+  }
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
     #card
   {
   transition: 1s all;
@@ -6,7 +25,7 @@
  #card:hover
   {
   border-radius: 10px;
-  box-shadow: 0px 0px 6px 2px black inset ;
+  box-shadow: 0px 0px 5px 1px black ;
   transition: 500ms linear;
   z-index: 1000;
   }
@@ -14,22 +33,43 @@
  #all_T_amount
  {
   font-family:cursive;
-  position: fixed;
-  top: 60px;
-  left: 900px;
-  z-index: 1;
+  position:absolute;
+  top: 70px;
+  left: 800px;
  }
+  #all_buy_btn
+ {
+  font-family:cursive;
+  position:absolute;
+  top: 60px;
+  left: 1140px;
+ }
+
   #all_T_amount:hover
  {
   color: darkgreen;
   font-family: bold;
   font-family:cursive;
   position: fixed;
-  top: 60px;
-  left: 900px;
+  top: 70px;
+  left: 850px;
   z-index: 1;
  }
 </style>
+
+ <div id="all_T_amount">
+  <span>Total Cart Amount : </span>
+    <span>
+      <%=@cart.map(&:price).map(&:to_i).sum%>
+    </span>
+    <span style="margin-left:10px;">Total cart Item :
+      <span><%=@cart.map(&:id).count%></span>
+    </span>
+  </div>
+   <% @cart.each_with_index do |cart, index|%>
+   <span id = all_buy_btn>
+    <%=link_to "Buy now" ,orders_path(bunch_buy: true , ids: @cart.map(&:id),user_id: @user_id ,id: Vegetable.find(cart.vegetable_id)), class: "btn-grad"%></span> &nbsp;&nbsp;&nbsp;
+<%end%>
 <h2 style="font-family:cursive;text-align:center">Cart Data</h2>
 <div class="container">
   <iv class="row">
@@ -44,28 +84,21 @@
             <%= image_tag(vegetable.vegetable_img) if cart.vegetable_id.present?%>
           </div>
           <div class="col-md-8">
-            <div class="card-body"style="margin-left: 300px;">
+            <div class="card-body"style="margin-left: 100px;">
               <p class="card-title"><b>Name : </b><%=Vegetable.find(cart.vegetable_id).name%></p>
               <p class="card-text" ><b>Price : </b><span id="price_<%= cart.id %>"><%= cart.price%></span> </p>
-              <%= cart.user_id%> | <%= cart.vegetable_id%>
+              <b>User id : </b> <%=cart.vegetable_id%>
+             <b>Vegetable  id : </b> <%=cart.vegetable_id%>
               <p class="card-text" ><b>Quantity : </b><span id= "quantity_<%=cart.id %>"><%=cart.quntity.to_i%></span></p>
-              <%=link_to "Buy now" ,orders_path(user_id: @user_id ,id: cart.id), class: "btn btn-primary"%>
+               <%#byebug%>
+              <%=link_to "Buy now",cart_item_path(user_id: current_user.id,id:cart.id,vegetable_id: Vegetable.find(cart.vegetable_id).id,vegetable_img:cart.vegetable_img), class: "btn btn-primary"%><!--method="post"-->
+            <%#=link_to "buy now",cart_item_path(user_id: @user_id ,id: cart.id), class: "btn btn-primary"%>
               <%=link_to "Remove" ,cart_item_path(cart.id),method: :delete ,data: {confirm:"Are You Soure ?"} ,class: "btn btn-danger"%>
               <br></br>
               <input type="button" id= "<%= cart.id %>" value="-" class="decriment" />
               <input type="text" name="quantity" value="<%= cart.quntity ? cart.quntity : "1" %>"   size="1" id="number_<%=cart.id %>" style="text-align:center;" />
               <input type="button" id= "<%= cart.id %>" value="+" class="increment" />
              <P style="margin-top:10px;margin-left: 210px;">Total Amount : </P><p class="card-text"  id="total_<%=cart.id%>" style="margin-left: 340px;margin-top: -40px;" ><%=(cart.quntity.to_i*cart.price.to_i)%></p>
-              <!-- <h1 style="font-family:cursive;text-align:right" id="total_<%=cart.id%>">Total Amount : <%#=cart.price%> </h1> -->
-              <div id="all_T_amount">
-              <span>Total Cart Amount : </span>
-                <span>
-                  <%=@cart.map(&:price).map(&:to_i).sum%>
-                </span>
-                <span style="margin-left:10px;">Total cart Item :
-                  <span><%=@cart.map(&:id).count%></span>
-                </span>
-              </div>
             </div>
           </div>
 
@@ -76,8 +109,6 @@
     <%end%>
   </div>
 </div>
-
-
 <script type="text/javascript">
   $(".increment").on("click", function(){
     id = $(this).attr("id")

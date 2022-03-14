@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="box shadow">
-      <div class="col-sm-6">
-        <div class="box shadow">
+      <div class="col-sm-6"style="margin-left: 200px;">
           <div class="row">
             <div class="col-sm-12">
               <nav class="navbar navbar-light bg-info">
@@ -29,18 +28,22 @@
               <p class="card-text">
                 <b>Pin code : </b><%=add.pin_code%>
               </p>
-              <p class="confirm"><%=link_to "CONFIRM","#",class:"btn btn-warning",style:"margin-left:250px;width:200px;color:white;font-family:bold;"%>
+              <%# byebug %>
+             <p class="confirm"><%#=link_to "CONFIRM",orders_path(user_id: current_user.id , vegetable_id: params[:vegetable_id], address_id: params[:id], cartitems_id: params[:ids], bunch_buy: params[:buch_buy]),class:"btn btn-warning",style:"margin-left:250px;width:200px;color:white;font-family:bold;",method:"post"%>
+              <%=link_to "Pay Amount",root_path,class:"btn btn-primary"%>
               </p>
             </div>
           </div><%end%>
-        </div>
       </div>
-      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <%=image_tag('shopping.jpg')%>
+      </div>
     </div>
   </div>
-</div>
+</div><br><br><br>
  <script type="text/javascript">
   $(".confirm").on("click", function(){
-         alert("product ordered Successfully")
+         alert("Thank You Visit Our Website !..")
     });
 </script>
+

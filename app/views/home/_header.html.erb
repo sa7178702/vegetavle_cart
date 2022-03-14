@@ -14,15 +14,15 @@
 <% if user_signed_in? %>
 <% if current_user.role =='admin'%>
 <!-- admin search input box -->
-<div style="margin-top:5px;">
+<div style="margin-top:4px;">
 <%= form_for "",url:  home_index_path , role: "search" , method: :get do%>
-<%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;"%>
+<%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;margin-left:7px;"%>
 <%end%>
 </div>
 <!-- admin dropsown list -->
 <div class="dropdown" style="margin-left:500px;">
-<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  User Profile
+<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Select List
 </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <li class="nav-item">
@@ -52,34 +52,41 @@
 <button class="btn btn-outline-success" type="submit">Search</button>
 </form> -->
 <!--user search box-->
-<div style="margin-top:5px;">
+<div style="margin-top:2px;margin-left: 10px;">
   <%= form_for "",url:  home_index_path , role: "search" , method: :get do%>
-  <%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;"%>
+  <%= text_field_tag :search, @search_term , placeholder: "search",style:"border-radius:5px;height:35px;padding-left:7px;"%>
   <%end%>
 </div>
 <!--end user search box-->
 <!--user dropdown -->
-<div class="dropdown" style="margin-left:400px;">
+<div class="dropdown" style="margin-left:400px; ">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    User Profile
+   Select List
   </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link',style:"color:black;" %></li>
+      <li class="nav-item">
+        <%= link_to 'User Profile', user_profiles_path,class: 'nav-link',style:"color:black;" %>
+    </li>
     <li class="nav-item">
         <%= link_to 'Edit Profile', edit_user_registration_path,class: 'nav-link',style:"color:black;" %>
     </li>
     <li class="nav-item">
-        <%= link_to 'all vegetable list',home_index_path,class: 'nav-link',style:"color:black;" %>
+        <%= link_to 'All vegetable list',home_index_path,class: 'nav-link',style:"color:black;" %>
     </li>
      <li class="nav-item">
-        <%= link_to 'add address',new_address_path,class: 'nav-link',style:"color:black;" %>
+        <%= link_to 'Add address',new_address_path,class: 'nav-link',style:"color:black;" %>
     </li>
          <li class="nav-item">
-        <%= link_to 'address list',addresses_path,class: 'nav-link',style:"color:black;" %>
+        <%= link_to 'Address list',addresses_path,class: 'nav-link',style:"color:black;" %>
     </li>
       </li>
          <li class="nav-item">
         <%= link_to 'cart list',cart_items_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+       <li class="nav-item">
+        <%= link_to 'Order history',orders_history_index_path,class: 'nav-link',style:"color:black;" %>
+    </li>
+     <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link',style:"color:black;" %>
     </li>
   </ul>
 </div>
@@ -97,7 +104,7 @@
 </div>
 <!-- end category list-->
  <li class="nav-item">
-    <%= link_to 'Map',maps_path,class: 'nav-link',style:"color:white;margin-left:5px;",class:"btn btn-secondary" %>
+    <%= link_to 'Map',maps_path,class: 'nav-link',style:"color:white;margin-left:5px;width:100px;",class:"btn btn-secondary" %>
 </li>
 <% end %>
 <% else %>

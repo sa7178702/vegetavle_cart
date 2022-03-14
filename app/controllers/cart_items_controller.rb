@@ -13,6 +13,9 @@ end
 # 	end
 # 	@current_cart
 # end
+def show
+	@cart = CartItem.find_by(id: params[:id])
+end
 
 def checkout
 	cart = current_user.cart

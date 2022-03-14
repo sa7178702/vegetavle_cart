@@ -1,3 +1,23 @@
+<style type="text/css">
+ .btn-grad {background-image: linear-gradient(to right, #159957 0%, #155799  51%, #159957  100%)}
+ .btn-grad {
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+
+  .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+</style>
 <div class="container">
 <div class="row">
 <div class="col-sm-3"></div>
@@ -15,7 +35,7 @@
     <%=f.text_field :description,class:"form-control"%>
     <%=f.label :vegetable_img%>
     <%=f.file_field :vegetable_img,class:"form-control"%>
-    <%=f.submit "add vegetable",class:"btn btn-primary",style:"margin-top:10px;"%>
+    <%=f.submit "add vegetable",class:"btn-grad",style:"margin-top:10px;"%>
   <%end%>
 </div>
 </div>
